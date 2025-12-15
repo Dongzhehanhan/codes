@@ -10,7 +10,6 @@ using namespace std;
 
 const int maxN = 3e4 + 10;
 int head[maxN];
-int tail[maxN];
 
 
 int FIND(int x)
@@ -26,8 +25,7 @@ void UNION(int a,int b){
     int hb = FIND(b);
     if (ha != hb)
     {
-        head[tail[ha]] = hb;
-        tail[ha] = tail[hb];
+        head[hb]=ha;
     }
 
 }
@@ -41,7 +39,6 @@ int main()
         scanf("%d %d", &n, &m);
         for(int i = 1;i<=n;i++){
             head[i] = i;
-            tail[i] = i;
         }
         for (int i = 0; i < m; i++)
         {

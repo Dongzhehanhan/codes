@@ -18,7 +18,7 @@ void Make_set(int x){
 }
 
 int Find(int x){
-    if(Parent[x]<0) return x;
+    if(Parent[x]<=0) return x;
     Parent[x] = Find(Parent[x]);
     return Parent[x];
 }
@@ -26,7 +26,7 @@ int Find(int x){
 void Union(int a,int b){
     int fa = Find(a);
     int fb = Find(b);
-    if(fa=fb) return;
+    if(fa==fb) return;
     if(Parent[fa]<Parent[fb]){
         Parent[fb] = fa;
     }
@@ -43,7 +43,7 @@ bool cmp(const Edge& a,const Edge& b){
 }
 
 int Kruskal(Edge E[],int n,int e){
-    for(int i = 0;i<n;i++){
+    for(int i = 0;i<=n;i++){
         Make_set(i);
     }
     sort(E,E+e,cmp);
@@ -61,7 +61,8 @@ int Kruskal(Edge E[],int n,int e){
 }
 int main(){
     int n,e;
-    cin>>n>>e;
+    scanf("%d %d",&n,&e);
+    int total_v = n+1;
     vector<int> RouterCost(n);
     for(int i = 0;i<n;i++){
         scanf("%d",&RouterCost[i]);
@@ -80,9 +81,10 @@ int main(){
         E[count].head=u;
         E[count].tail=v;
         E[count].cost=w;
+        count++;
     }
 
-    int res = Kruskal(E,n+1,e);
+    int res = Kruskal(E,total_v,count);
     printf("%d\n",res);
     return 0;
 }
